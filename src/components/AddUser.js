@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import UserService from '../services/UserService'
 
 const AddUser=()=>{
 
@@ -12,11 +13,23 @@ const AddUser=()=>{
     const [user,setUser]=useState(initialUserState)
     const [submitted,setSubmitted]=useState(false)
 
-    const onChange=()=>{
-
+    const onChange=(event)=>{
+        const {name,value}=event.target 
+        setUser({...user,[name]:value})
     }
 
     const saveUser=()=>{
+        var userData={
+            firstName:user.firstName,
+            lastName:user.lastName,
+            city:user.city,
+            isActive:user.isActive
+        }
+       console.log(userData)
+       UserService.create(userData)
+        .then(response=>{
+            console.log(response.data)
+        })
 
     }
 
