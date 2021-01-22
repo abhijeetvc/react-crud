@@ -16,6 +16,7 @@ const AddUser=()=>{
     const onChange=(event)=>{
         const {name,value}=event.target 
         setUser({...user,[name]:value})
+        // setUser({[event.target.name]:event.target.value})
     }
 
     const saveUser=()=>{
@@ -26,15 +27,25 @@ const AddUser=()=>{
             isActive:user.isActive
         }
        console.log(userData)
+    
        UserService.create(userData)
         .then(response=>{
+            setUser({
+                id:response.data.id,
+                firstName:response.data.firstName,
+                lastName:response.data.lastName,
+                city:response.data.city,
+                isActive:response.data.isActive
+            })
+            setSubmitted(true)
             console.log(response.data)
         })
 
     }
 
     const newUser=()=>{
-        
+        setUser(initialUserState)
+        setSubmitted(false)
     }
 
     return(

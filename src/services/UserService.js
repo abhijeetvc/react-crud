@@ -5,7 +5,7 @@ const getAllUsers=()=>{
 }
 
 const create=userData=>{
-    return http.post("/users",userData)
+    return http.post("/save",userData)
 }
 
 export default {

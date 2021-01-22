@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
+import UserService from '../services/UserService'
 
 const UserList=()=>{
     const [users,setUsers]=useState([])
@@ -8,7 +9,8 @@ const UserList=()=>{
 
     // tells that component need to do something after render or performing the DOM updates
     // gets invoked after the component is rendered or after the DOM updates
-    const useEffect=(() => {
+    useEffect(() => {
+        console.log("hiiiiiiiiiiiiii")
        fetchUsers()
     }, [])
 
@@ -17,10 +19,20 @@ const UserList=()=>{
     }
 
     const fetchUsers=()=>{
-
+          UserService.getAllUsers()
+            .then(response=>{
+                setUsers(response.data)
+                console.log(response.data)
+            })
     }
     const findByUser=()=>{
+        
+    }
 
+    const setActiveUser=(user,index)=>{
+        console.log("Index value: "+index)
+        setCurrentUser(user)
+        setCurrentIndex(index)
     }
     return(
         <div className="list row">
@@ -50,16 +62,17 @@ const UserList=()=>{
                     <li className={
                         "list-group-item" + (index===currentIndex ? "active":"")
                     }
+                    onClick={()=>setActiveUser(user,index)}
                     key={index}>
                         {user.firstName+' '+user.lastName}
-                    </li>)
-
+                    </li>)  
                  }
             </ul>
         </div>
 
         <div className="col-md-6">
-           { currentUser ? (
+           {   
+               currentUser ? (
                <div>
                     <h3>User Info:</h3>
                     <div>
