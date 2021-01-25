@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route, Link} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css"
 import UserList from './components/UserList'
+import EditUser from './components/EditUser'
 
 import AddUser from './components/AddUser'
 
@@ -26,8 +27,9 @@ function App(){
 
             <div className="container mt-3">
                     <Switch>
-                        <Route path="/add" component={AddUser}/>
-                        <Route path={["/","/users"]} component={UserList}/>
+                        <Route exact path="/add" component={AddUser}/>
+                        <Route exact path={["/","/users"]} component={UserList}/>
+                        <Route path="/users/:id" component={EditUser}/>
                     </Switch>
             </div>
         </div>

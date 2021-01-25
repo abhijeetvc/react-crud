@@ -54,7 +54,7 @@ const AddUser=()=>{
             {submitted ? (
                 <div>
                     <h3>User submitted Successfully</h3>
-                    <button className="btn btn-success" onClick={newUser}>Add</button>
+                    <button className="btn btn-success" onClick={newUser}>Add User</button>
                 </div>
             ):(
                 <div>

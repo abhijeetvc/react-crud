@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import UserService from '../services/UserService'
+import {Link} from 'react-router-dom'
 
 const UserList=()=>{
     const [users,setUsers]=useState([])
@@ -18,6 +19,9 @@ const UserList=()=>{
         setSearchUser(event.target.value)
     }
 
+    const styles={
+        background:"yellowgreen"
+    }
     const fetchUsers=()=>{
           UserService.getAllUsers()
             .then(response=>{
@@ -58,13 +62,14 @@ const UserList=()=>{
             <h3>User List : </h3>
 
             <ul className="list-group">
-                 { users && users.map((user,index)=>
-                    <li className={
-                        "list-group-item" + (index===currentIndex ? "active":"")
-                    }
+                 { users.map((user,index)=>
+                    // <li className={
+                    //     "list-group-item" + (index===currentIndex ? "active":"")
+                    // }
+                    <li className="list-group-item"
                     onClick={()=>setActiveUser(user,index)}
                     key={index}>
-                        {user.firstName+' '+user.lastName}
+                    {user.firstName+' '+user.lastName}
                     </li>)  
                  }
             </ul>
@@ -84,6 +89,8 @@ const UserList=()=>{
                     <div>
                         <label htmlFor="city">City: {currentUser.city}</label>
                     </div>
+
+                    <Link to={"/users/"+currentUser.id}>Edit</Link>
                </div>
            ) :(
                <div>
